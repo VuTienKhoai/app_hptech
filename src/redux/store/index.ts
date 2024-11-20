@@ -3,16 +3,16 @@ import {persistStore, persistReducer} from 'redux-persist';
 import {configureStore} from '@reduxjs/toolkit';
 
 // import PackageSliceReducer from '../slide/package.slice';
-import {persistConfig} from './PersistConfig';
+import {persistConfig, persistUserConfig} from './PersistConfig';
 import RootReducer from './RootReducer';
 
 const persistedReducer = persistReducer(persistConfig, RootReducer);
-
+const persistedUserReducer = persistReducer(persistUserConfig, RootReducer);
 export const store = configureStore({
   reducer: {
     //persisted
     persistedReducer,
-
+    persistedUserReducer,
     //Reducer
     // PackageSliceReducer,
   },

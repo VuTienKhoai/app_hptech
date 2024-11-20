@@ -8,6 +8,7 @@ export interface IAppState {
   saveLoginInfo: any | null | undefined;
   saveLogin: boolean;
   activeModal: boolean | null | undefined;
+  cookies: string | null | undefined;
 }
 const initialState: IAppState = {
   token: null,
@@ -16,13 +17,19 @@ const initialState: IAppState = {
   saveLogin: false,
   saveLoginInfo: null,
   activeModal: false,
+  cookies: '',
 };
 export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    setCookies: (state, action: PayloadAction<string>) => {
+      state.cookies = action.payload;
+    },
+
     resetLogin: state => {
       state.token = null;
+      state.cookies = null;
     },
 
     setToken: (state, action: PayloadAction<string>) => {
@@ -68,8 +75,10 @@ export const {
   setActiveModal,
   setLogout,
   resetAccount,
+  setCookies,
 } = appSlice.actions;
-
+export const getCookiesState = (state: RootState) =>
+  state.persistedReducer.app.cookies;
 export const getTokenState = (state: RootState) =>
   state.persistedReducer.app.token;
 export const saveLoginState = (state: RootState) =>

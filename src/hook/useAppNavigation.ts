@@ -1,11 +1,10 @@
 import {useSelector} from 'react-redux';
-import {getTokenState} from '../redux/slide/app.slice';
+import {getCookiesState, getTokenState} from '../redux/slide/app.slice';
 
 const useAppNavigation = () => {
-  const isToken = useSelector(getTokenState);
-
+  const cookies = useSelector(getCookiesState);
   return {
-    isToken,
+    cookies,
   };
 };
 
