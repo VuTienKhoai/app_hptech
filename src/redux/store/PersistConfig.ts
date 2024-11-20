@@ -6,4 +6,10 @@ const persistConfig = {
   blacklist: ['value'],
 };
 
-export {persistConfig};
+const persistUserConfig = {
+  key: 'user',
+  storage: AsyncStorage,
+  blacklist: ['value'],
+};
+
+export {persistConfig, persistUserConfig};
