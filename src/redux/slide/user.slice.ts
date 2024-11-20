@@ -40,4 +40,6 @@ export const {setUser, setAvatar, setPhoneNumber, setEmail} = userSlice.actions;
 
 export const getUserInfoState = (state: RootState) =>
   state.persistedUserReducer.user;
+export const getUserPhoneNumber = (state: RootState) =>
+  state.persistedUserReducer.user.phoneNumber;
 export default userSlice.reducer;
