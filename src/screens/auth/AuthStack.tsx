@@ -3,11 +3,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './login';
 import Register from './register';
 import ForgotPassword from './forgot_password';
+import {OtpAuth} from './fillOtpScreen';
 
 export type AuthStackParams = {
   Login: undefined;
   Register: undefined;
   ForgotPassword: undefined;
+  OtpAuth: {
+    otpToken: string;
+  };
 };
 const Stack = createNativeStackNavigator<AuthStackParams>();
 export default function AuthStack() {
@@ -22,12 +26,10 @@ export default function AuthStack() {
         name="ForgotPassword"
         component={ForgotPassword}
         options={{
-          headerTitle: '', // Tắt title của header
-          headerTitleAlign: 'center',
           headerShown: false,
-          headerTintColor: '#FFFFFF', // Màu của nút back
         }}
       />
+      <Stack.Screen name="OtpAuth" component={OtpAuth} />
     </Stack.Navigator>
   );
 }

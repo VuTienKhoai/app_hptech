@@ -61,15 +61,7 @@ const InputFormAuth = ({
       <Controller
         control={control}
         name={name}
-        rules={{
-          ...rules,
-          validate: {
-            ...rules?.validate,
-            notOnlySpaces: value => {
-              return value.toString().trim() !== '';
-            },
-          },
-        }}
+        rules={rules}
         render={({field: {onChange, onBlur, value}}) => (
           <View style={styles.gap2}>
             <View style={[styles.FormViewAuth, inputStyle]}>

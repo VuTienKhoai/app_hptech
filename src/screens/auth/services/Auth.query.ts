@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {IQueryParamsBody} from '../../../utils/type';
-import {useQuery, UseQueryOptions} from '@tanstack/react-query';
-import {login} from './Auth.api';
+import {useQuery, UseQueryOptions, UseQueryResult} from '@tanstack/react-query';
+import {login, resgiter} from './Auth.api';
 import CookieManager from '@react-native-cookies/cookies';
 import {APP_URL} from '../../../constants/Url';
 import {store} from '../../../redux/store';
