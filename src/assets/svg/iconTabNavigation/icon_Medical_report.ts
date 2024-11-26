@@ -1,0 +1,20 @@
+export const icon_Medical_report = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="mdl-js">
+<path d="M1.86589 5.33333C1.86589 2.75601 3.95522 0.666667 6.53255 0.666667H14.5901C15.8278 0.666667 17.0147 1.15833 17.8899 2.0335L20.7657 4.90931C21.6409 5.78448 22.1326 6.97146 22.1326 8.20914V18.6667C22.1326 21.244 20.0432 23.3333 17.4659 23.3333H6.53256C3.95523 23.3333 1.86589 21.244 1.86589 18.6667V5.33333Z" stroke="#003553" stroke-width="1.33333" stroke-linejoin="round"/>
+<path d="M7.19922 6L15.5992 6" stroke="#003553" stroke-width="1.33333" stroke-linecap="round"/>
+<path d="M7.19922 12H15.5992" stroke="#003553" stroke-width="1.33333" stroke-linecap="round"/>
+<path d="M7.19922 18H11.9992" stroke="#003553" stroke-width="1.33333" stroke-linecap="round"/>
+</svg>
+`;
+
+export const icon_Medical_reportAcitve = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:#00b5f1; stroke:#00b5f1;">
+  <path d="M1.86589 5.33333C1.86589 2.75601 3.95522 0.666667 6.53255 0.666667H14.5901C15.8278 0.666667 17.0147 1.15833 17.8899 2.0335L20.7657 4.90931C21.6409 5.78448 22.1326 6.97146 22.1326 8.20914V18.6667C22.1326 21.244 20.0432 23.3333 17.4659 23.3333H6.53256C3.95523 23.3333 1.86589 21.244 1.86589 18.6667V5.33333Z" 
+    style="stroke:#00b5f1; stroke-width:1.33333; stroke-linejoin:round;" />
+  <path d="M7.19922 6L15.5992 6" 
+    style="stroke:#ffffff; stroke-width:1.33333; stroke-linecap:round;" />
+  <path d="M7.19922 12H15.5992" 
+    style="stroke:#ffffff; stroke-width:1.33333; stroke-linecap:round;" />
+  <path d="M7.19922 18H11.9992" 
+    style="stroke:#ffffff; stroke-width:1.33333; stroke-linecap:round;" />
+</svg>
+
+`;

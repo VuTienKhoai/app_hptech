@@ -1,7 +1,7 @@
 import {Text, TextInput, TouchableOpacity, View, ViewStyle} from 'react-native';
 import {TEXT_COLORS_DARK, TEXT_COLORS_BLACK} from '../../constants/Color';
 import {Controller} from 'react-hook-form';
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import {styles} from './style';
 import {SvgXml} from 'react-native-svg';
 import {EyeAuthCloseIcon} from '../../assets/svg/auth/EyeAuthCloseIcon';
@@ -20,6 +20,7 @@ interface IInputForm {
   inputStyle?: ViewStyle;
   colorIcon?: string;
   strokeColorIcon?: string;
+  autoFocus?: boolean;
 }
 const InputFormAuth = ({
   title,
@@ -34,11 +35,13 @@ const InputFormAuth = ({
   inputStyle,
   colorIcon,
   strokeColorIcon,
+  autoFocus = false,
 }: IInputForm) => {
   const [isSecure, setIsSecure] = useState(true);
   const toggleSecureTextEntry = () => {
     setIsSecure(!isSecure);
   };
+  const inputRef = useRef<TextInput>(null);
   const borderStyle: any = useMemo(() => {
     return !errors
       ? {
@@ -53,6 +56,11 @@ const InputFormAuth = ({
           textAlignVertical: height > 53 ? 'top' : 'center',
         };
   }, [errors]);
+  useEffect(() => {
+    if (autoFocus && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [autoFocus]);
   return (
     <View style={styles.InputFormView}>
       {title ? (
@@ -66,6 +74,7 @@ const InputFormAuth = ({
           <View style={styles.gap2}>
             <View style={[styles.FormViewAuth, inputStyle]}>
               <TextInput
+                ref={inputRef}
                 style={[borderStyle, styles.AuthInput, inputStyle]}
                 placeholder={placeholder}
                 value={value}

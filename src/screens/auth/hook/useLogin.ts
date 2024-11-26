@@ -16,7 +16,7 @@ import {AlertHelper} from '../../../utils/AlertHelper';
 import {setEmail} from '../../../redux/slide/user.slice';
 import ShowToastCustom from '../../../components/notification/ShowToast';
 
-export const useLogin = (checked: boolean) => {
+export const useLogin = () => {
   const dispatch = useDispatch();
   const saveLoginInfo = useSelector(getSaveLoginInfo);
   const [body, setBody] = useState<Ilogin>();
@@ -33,18 +33,13 @@ export const useLogin = (checked: boolean) => {
     body: body,
     options: {staleTime: 0, queryKey: ['login', body]},
   });
+  console.log('🚀 ~ useLogin ~ data:', data);
 
   const onSubmit = (values: any) => {
     const loginData = {
       email: values?.email,
       password: values?.password,
     };
-
-    /** sử dụng setParams để truyền params vào useSignin,
-     * vì useQuery ko cho phép thực hiện action onSubmit,
-     * dùng cách này vì login của Duy đang dùng method Get, thông thường login phải sử dụng method Post,
-     * và phải dùng mutation trong react-query để thực hiện 1 action
-     */
     setBody(loginData);
     return;
   };
@@ -53,7 +48,7 @@ export const useLogin = (checked: boolean) => {
     if (data?.err == 1 && !data?.access_token) {
       AlertHelper({
         title: 'Thông báo',
-        message: 'Tài khoản hoặc mật khẩu không đúng!',
+        message: data.mess,
         positiveButton: 'Quên mật khẩu',
         negativeButton: 'Đóng',
         confirmCallback: goToForgotPassword,
@@ -69,10 +64,9 @@ export const useLogin = (checked: boolean) => {
     }
   }, [data, count]);
   useEffect(() => {
-    if (checked && body && body?.email && body?.password) {
+    if (body && body?.email && body?.password) {
       dispatch(
         setSaveLogin({
-          isSave: checked,
           saveLoginInfo: {
             email: body.email,
             password: body.password,
@@ -82,12 +76,16 @@ export const useLogin = (checked: boolean) => {
     } else {
       dispatch(
         setSaveLogin({
-          isSave: checked,
           saveLoginInfo: null,
         }),
       );
     }
-  }, [checked, body]);
+  }, [body]);
+  useEffect(() => {
+    body && refetch();
+    // && registerAndLoginToolAI();
+    setCount(count + 1);
+  }, [body]);
   const {
     control,
     handleSubmit,

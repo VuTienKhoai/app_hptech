@@ -6,12 +6,11 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import HeaderAuth from '../../../components/layout/HeaderAuth';
 import {icon_Back} from '../../../assets/svg/auth/iconBack';
 import {InputFormAuth} from '../../../components/input';
-import {useForm} from 'react-hook-form';
 import {
   EMAIL_RULES,
   PASSWORD_RULES,
@@ -20,76 +19,17 @@ import {
 } from '../../../constants/rules';
 import {ButtonSubmit} from '../../../components/button';
 import {styles} from './stylesRegister';
-import {resgiter} from '../services/Auth.api';
-import ShowToastCustom from '../../../components/notification/ShowToast';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {AuthStackParams} from '../AuthStack';
+import {useRegister} from './hook/useRegister';
 
-type IformDataRegister = {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
 export default function Register() {
   const insets = useSafeAreaInsets();
-  const [loading, setLoading] = useState(false);
-  const navigation =
-    useNavigation<NativeStackNavigationProp<AuthStackParams>>();
+  const {onSubmit, control, handleSubmit, errors, loading} = useRegister();
   const useMemoStyleContainer = useMemo(() => {
     return {
       ...styles.containerRegister,
       paddingTop: insets.top,
     };
   }, [insets]);
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm({
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    },
-  });
-  const handleNavigateFillOTP = useCallback(
-    (otpToken: string) => {
-      navigation.navigate('OtpAuth', {otpToken: otpToken});
-    },
-    [navigation],
-  );
-  const onSubmit = useCallback((data: IformDataRegister) => {
-    const {confirmPassword, ...newObject} = data;
-    setLoading(true);
-    if (data) {
-      resgiter(newObject)
-        .then((res: any) => {
-          if (res.err == 0 && res.otpToken) {
-            ShowToastCustom({
-              text1: 'Otp đã được gửi về Email của bạn',
-              typeStatus: 'success',
-            });
-            handleNavigateFillOTP(res.otpToken);
-          } else {
-            ShowToastCustom({text1: res.mess, typeStatus: 'error'});
-          }
-        })
-
-        .catch(error => {
-          console.log('Lỗi API:', error);
-          ShowToastCustom({
-            text1: 'Đã có lỗi xảy ra, vui lòng thử lại.',
-            typeStatus: 'error',
-          });
-        })
-        .finally(() => {
-          setLoading(false); // Dừng loading
-        });
-    }
-  }, []);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

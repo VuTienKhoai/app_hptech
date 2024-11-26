@@ -4,13 +4,18 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../screens/home';
 import MedicalReport from '../screens/medical_report';
 import ProfileUser from '../screens/profile_user';
+import MainTabNavigation from './MainTabNavigation';
+import Appointment_booking from '../screens/appointment_booking/Appointment_booking';
 
 export type MainStackParams = {
+  MainTabNavigation: undefined;
   Home: undefined;
   MedicalReport: undefined;
   ProfileUser: undefined;
+  Appointment_booking: undefined;
 };
 const Stack = createNativeStackNavigator<MainStackParams>();
+
 export default function MainStackNavigation() {
   return (
     <View style={styles.containerAuthStack}>
@@ -18,6 +23,7 @@ export default function MainStackNavigation() {
         screenOptions={{
           headerShown: false,
         }}>
+        <Stack.Screen name="MainTabNavigation" component={MainTabNavigation} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen
           name="MedicalReport"
@@ -34,6 +40,13 @@ export default function MainStackNavigation() {
             headerTitleAlign: 'center',
             headerShown: false,
             headerTintColor: '#FFFFFF', // Màu của nút back
+          }}
+        />
+        <Stack.Screen
+          name="Appointment_booking"
+          component={Appointment_booking}
+          options={{
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

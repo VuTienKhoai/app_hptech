@@ -6,3 +6,6 @@ export type IActiveAccount = {
   otp: string;
   otpToken: string;
 };
+export type IResendOTP = {
+  email: string;
+};

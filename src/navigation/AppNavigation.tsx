@@ -11,7 +11,8 @@ import {useDispatch} from 'react-redux';
 import {setPhoneNumber} from '../redux/slide/user.slice';
 
 export function CreateAppContainer() {
-  const {cookies} = useAppNavigation();
+  // const {cookies} = useAppNavigation();
+  const cookies = '41241412';
   const dispatch = useDispatch();
   const getPhoneNumber = useCallback(async () => {
     await RequestPermission();

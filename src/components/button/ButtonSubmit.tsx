@@ -23,7 +23,6 @@ export type ButtonSubmitProps = {
 
 const ButtonSubmit = (props: ButtonSubmitProps) => {
   const {onPress, title, styleView, styleText, onLoading} = props;
-
   const onPressHandle = useCallback(() => {
     !onLoading && onPress();
   }, [onLoading, onPress]);

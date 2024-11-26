@@ -42,4 +42,6 @@ export const getUserInfoState = (state: RootState) =>
   state.persistedUserReducer.user;
 export const getUserPhoneNumber = (state: RootState) =>
   state.persistedUserReducer.user.phoneNumber;
+export const getUserEmail = (state: RootState) =>
+  state.persistedUserReducer.user.email;
 export default userSlice.reducer;
