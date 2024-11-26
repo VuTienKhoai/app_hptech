@@ -1,6 +1,13 @@
 import React, {useCallback, useEffect, useMemo} from 'react';
 import type {PropsWithChildren} from 'react';
-import {Dimensions, StatusBar, Text, useColorScheme, View} from 'react-native';
+import {
+  Dimensions,
+  StatusBar,
+  Text,
+  useColorScheme,
+  View,
+  PermissionsAndroid,
+} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import {
@@ -15,9 +22,11 @@ import CreateAppContainer from './src/navigation/AppNavigation';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import Toast, {ToastConfigParams} from 'react-native-toast-message';
 import ToastCustom from './src/components/notification/ToastCustom';
+import messaging from '@react-native-firebase/messaging';
 const queryClient = new QueryClient();
 const tanstackQueryClient = new TanstackQueryClient();
 function App(): React.JSX.Element {
+  PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
   const isDarkMode = useColorScheme() === 'dark';
   const configToastMemo = useMemo(() => {
     return {
@@ -26,7 +35,13 @@ function App(): React.JSX.Element {
       ),
     };
   }, []);
+  // useEffect(() => {
+  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
+  //     console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
+  //   });
 
+  //   return unsubscribe;
+  // }, []);
   useEffect(() => {
     SystemNavigationBar.fullScreen(true);
     StatusBar.setHidden(true);

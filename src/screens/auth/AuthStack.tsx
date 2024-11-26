@@ -22,14 +22,8 @@ export default function AuthStack() {
       }}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen
-        name="ForgotPassword"
-        component={ForgotPassword}
-        options={{
-          headerShown: false,
-        }}
-      />
       <Stack.Screen name="OtpAuth" component={OtpAuth} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
     </Stack.Navigator>
   );
 }

@@ -1,47 +1,64 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useCallback, useEffect} from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getCookiesState, resetLogin} from '../../redux/slide/app.slice';
+import {resetLogin} from '../../redux/slide/app.slice';
 import {QueryGetUserinfo, QueryLogOut} from './services/home.query';
 import Loading from '../../components/loading/Loading';
-import ShowToastCustom from '../../components/notification/ShowToast';
-import {ButtonSubmit} from '../../components/button';
+import {getUserInfoState, setUser} from '../../redux/slide/user.slice';
+import HeaderAvatar from '../../components/layout/HeaderAvatar';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import ContentHome from './ContentHome';
+import {BACKGROUND_BLUE} from '../../constants/Color';
 
 export default function Home() {
-  const {data, isLoading} = QueryGetUserinfo();
+  const {data: dataInfoUser, isLoading, isFetching} = QueryGetUserinfo();
+  const insets = useSafeAreaInsets();
+  const infoUser = useSelector(getUserInfoState);
+  const dispatch = useDispatch();
+
   const {
     data: dataLogout,
     isFetching: isFetchingLogout,
     refetch,
   } = QueryLogOut();
-  console.log('🚀 ~ Home ~ dataLogout:', dataLogout);
-
-  const dispatch = useDispatch();
-  const handleLogOut = useCallback(() => {
-    refetch();
+  const handleLogout = () => {
     dispatch(resetLogin());
-    ShowToastCustom({text1: 'Đã đăng xuất thành công', typeStatus: 'success'});
-  }, []);
-
+  };
+  useEffect(() => {
+    if (dataInfoUser?.user && dataInfoUser?.err == 0) {
+      dispatch(setUser(dataInfoUser?.user));
+    }
+  }, [dataInfoUser]);
   return (
-    <View>
-      {isLoading ? (
+    <View style={[styles.containerHome]}>
+      <HeaderAvatar
+        avatar={infoUser.avatar}
+        paddingTop={insets.top}
+        nameUser={infoUser?.name}
+      />
+      {isLoading || isFetching ? (
         <Loading />
       ) : (
-        <View>
-          <ButtonSubmit
-            title="Đăng Xuất"
-            onLoading={isFetchingLogout}
-            onPress={handleLogOut}
-          />
-          {/* <TouchableOpacity onPress={handleLogOut}>
-            <Text>Đăng xuất</Text>
-          </TouchableOpacity> */}
-          <Text>Home</Text>
-        </View>
+        <ScrollView style={styles.contentHome}>
+          <ContentHome />
+        </ScrollView>
       )}
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  containerHome: {
+    flex: 1,
+    backgroundColor: BACKGROUND_BLUE,
+  },
+  contentHome: {
+    flex: 1,
+  },
+});

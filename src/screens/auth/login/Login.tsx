@@ -1,24 +1,14 @@
 import {
-  Dimensions,
-  Image,
   ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {
-  BACKGROUND_WHITE,
-  TEXT_COLORS_DARK,
-  TEXT_COLORS_GREEN,
-} from '../../../constants/Color';
-import {theme} from '../../../constants/Theme';
-
 import {useLogin} from '../hook/useLogin';
 import {InputFormAuth} from '../../../components/input';
 import {EMAIL_RULES, PASSWORD_RULES} from '../../../constants/rules';
@@ -29,17 +19,8 @@ import {styles} from './styleLogin';
 
 export default function Login() {
   const insets = useSafeAreaInsets();
-  const [checked, setChecked] = useState<boolean>(false);
-  const {
-    onSubmit,
-    control,
-    handleSubmit,
-    errors,
-    isFetching,
-
-    goToForgotPassword,
-    handleRegister,
-  } = useLogin(checked);
+  const {onSubmit, control, handleSubmit, errors, isFetching, handleRegister} =
+    useLogin();
   const useMemoStyleContainer = useMemo(() => {
     return {
       ...styles.containerLogin,

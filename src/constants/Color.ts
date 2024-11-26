@@ -1,11 +1,15 @@
 export const BACKGROUND_WHITE = '#FFF';
 export const BACKGROUND_BLACK = '#000';
+export const TEXT_PRIMARY = '#00b5f1';
 export const TEXT_COLORS_DARK = '#fff';
 export const TEXT_COLORS_BLACK = '#000';
+export const TEXT_COLORS_GRAY = '#778290';
 export const TEXT_COLORS_GREEN = '#3AA999';
 export const PRIMARY = '#000';
 export const BACKGROUND = '#00b5f1';
-
+export const BACKGROUND_BLUE = '#CBE6FB';
+export const COLOR_NAVIGATION_FOCUS = '#00b5f1';
+export const COLOR_NAVIGATION = '#000';
 //Success
 export const SUCCESS_DARK_50 = '#1E611E';
 export const SUCCESS_DARK_25 = '#2D912C';

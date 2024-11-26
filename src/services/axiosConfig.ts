@@ -45,7 +45,7 @@ const handleResponseError = async (error: AxiosError<IResponse<any>>) => {
   //xử lý khi token hết hạn
 
   if (error.response?.status === 401) {
-    console.log('Lỗi xác thực');
+    // console.log('Lỗi xác thực');
     return Promise.reject(error);
   }
 
