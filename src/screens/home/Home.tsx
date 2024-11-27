@@ -1,13 +1,14 @@
 import {
+  RefreshControl,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {resetLogin} from '../../redux/slide/app.slice';
+import {getCookiesState, resetLogin} from '../../redux/slide/app.slice';
 import {QueryGetUserinfo, QueryLogOut} from './services/home.query';
 import Loading from '../../components/loading/Loading';
 import {getUserInfoState, setUser} from '../../redux/slide/user.slice';
@@ -15,21 +16,23 @@ import HeaderAvatar from '../../components/layout/HeaderAvatar';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import ContentHome from './ContentHome';
 import {BACKGROUND_BLUE} from '../../constants/Color';
+import {useQueryClient} from 'react-query';
 
 export default function Home() {
-  const {data: dataInfoUser, isLoading, isFetching} = QueryGetUserinfo();
+  const {
+    data: dataInfoUser,
+    isLoading,
+    isRefetching,
+    refetch: refetchUserInfo,
+  } = QueryGetUserinfo();
+  const queryClient: any = useQueryClient();
   const insets = useSafeAreaInsets();
   const infoUser = useSelector(getUserInfoState);
   const dispatch = useDispatch();
-
-  const {
-    data: dataLogout,
-    isFetching: isFetchingLogout,
-    refetch,
-  } = QueryLogOut();
-  const handleLogout = () => {
-    dispatch(resetLogin());
-  };
+  const handleRefresh = useCallback(() => {
+    queryClient.removeQueries(['getUserInfo']);
+    refetchUserInfo();
+  }, []);
   useEffect(() => {
     if (dataInfoUser?.user && dataInfoUser?.err == 0) {
       dispatch(setUser(dataInfoUser?.user));
@@ -42,10 +45,17 @@ export default function Home() {
         paddingTop={insets.top}
         nameUser={infoUser?.name}
       />
-      {isLoading || isFetching ? (
+      {isLoading || isRefetching ? (
         <Loading />
       ) : (
-        <ScrollView style={styles.contentHome}>
+        <ScrollView
+          style={styles.contentHome}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefetching}
+              onRefresh={handleRefresh}
+            />
+          }>
           <ContentHome />
         </ScrollView>
       )}

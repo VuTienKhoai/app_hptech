@@ -5,7 +5,9 @@ import ListContentHome from './ListContentHome';
 import ListHospital from './components/ListHospital';
 import ListBanner from './components/ListBanner';
 import TopHospitals from './TopHospitals';
-const {width, height} = Dimensions.get('screen');
+import ListDoctorCallVideo from './ListDoctorCallVideo';
+import ListHealthy from './ListHealthy';
+const {width} = Dimensions.get('screen');
 const ContentHome = () => {
   return (
     <View style={styles.containerContnetHome}>
@@ -17,6 +19,8 @@ const ContentHome = () => {
           <ListHospital />
           <ListBanner />
           <TopHospitals />
+          <ListDoctorCallVideo />
+          <ListHealthy />
         </View>
       </ImageBackground>
     </View>
