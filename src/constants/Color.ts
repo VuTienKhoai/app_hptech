@@ -5,6 +5,7 @@ export const TEXT_COLORS_DARK = '#fff';
 export const TEXT_COLORS_BLACK = '#000';
 export const TEXT_COLORS_GRAY = '#778290';
 export const TEXT_COLORS_GREEN = '#3AA999';
+export const TEXT_COLOR_ACTIVE = '#f1c40f';
 export const PRIMARY = '#000';
 export const BACKGROUND = '#00b5f1';
 export const BACKGROUND_BLUE = '#CBE6FB';

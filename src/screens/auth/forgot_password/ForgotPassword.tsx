@@ -6,7 +6,6 @@ import {
   Platform,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useMemo} from 'react';
@@ -17,31 +16,20 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {EMAIL_RULES} from '../../../constants/rules';
 import {theme} from '../../../constants/Theme';
 import {TEXT_COLORS_DARK} from '../../../constants/Color';
-import {useForm} from 'react-hook-form';
 import HeaderAuth from '../../../components/layout/HeaderAuth';
 import {icon_Back} from '../../../assets/svg/auth/iconBack';
+import {useForgotPassword} from './hook/useForgotPassword';
 const {width, height} = Dimensions.get('screen');
 export default function ForgotPassword() {
   const insets = useSafeAreaInsets();
+  const {onSubmit, control, handleSubmit, errors, loading, setLoading} =
+    useForgotPassword();
   const useMemoStyleContainer = useMemo(() => {
     return {
       ...styles.containerLogin,
       paddingTop: insets.top,
     };
   }, [insets]);
-  const onSubmit = (values: any) => {
-    console.log('🚀 ~ onSubmit ~ values:', values);
-    return;
-  };
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm({
-    defaultValues: {
-      email: '',
-    },
-  });
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
@@ -68,7 +56,7 @@ export default function ForgotPassword() {
               <ButtonSubmit
                 title={'Xác nhận'}
                 onPress={handleSubmit(onSubmit)}
-                onLoading={false}
+                onLoading={loading}
                 styleText={{fontSize: 1}}
               />
             </View>

@@ -1,6 +1,5 @@
 import axiosClient from '../../../services/axiosConfig';
-import {stringifyQuery} from '../../../utils/StringHelper';
-import {IActiveAccount, Ilogin, IResendOTP} from './AuthType';
+import {IActiveAccount, Ilogin} from './AuthType';
 
 export type loginResult = Awaited<ReturnType<typeof login>>;
 export const login = (body: Ilogin) => {
@@ -16,7 +15,10 @@ export const activeResgiter = (body: IActiveAccount) => {
   return axiosClient.post(url, body);
 };
 export const resendOTP = (body: any) => {
-  console.log('🚀 ~ resendOTP ~ body:', body);
   const url = `/auth/resend-otp`;
+  return axiosClient.post(url, body);
+};
+export const forgotPassword = (body: any) => {
+  const url = `/auth/forgot-password`;
   return axiosClient.post(url, body);
 };

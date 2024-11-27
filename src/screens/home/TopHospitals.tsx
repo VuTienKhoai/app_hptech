@@ -3,6 +3,7 @@ import React, {memo, useCallback} from 'react';
 import HeaderTopHospital from './components/HeaderTopHospital';
 import {dataHospitalTop} from '../../data_fake/dataHospitalTop';
 import ItemTopHospital from './components/ItemTopHospital';
+import {useTopHospital} from './hook/useTopHospital';
 interface IDataHospitalTop {
   id: string;
   name: string;
@@ -11,12 +12,7 @@ interface IDataHospitalTop {
   image: string;
 }
 const TopHospitals = () => {
-  const handleShowAllHospital = useCallback(() => {
-    console.log('Hiển thị tất cả bệnh viện');
-  }, []);
-  const handleDetailHospital = useCallback((id: string) => {
-    console.log(id);
-  }, []);
+  const {handleShowAllHospital, handleDetailHospital} = useTopHospital();
   const renderItemHospital = useCallback(
     ({item, index}: {item: IDataHospitalTop; index: number}) => {
       return (
@@ -44,7 +40,7 @@ const TopHospitals = () => {
       />
       <FlatList
         horizontal
-        style={{flex: 1}}
+        style={styles.listTopHospital}
         contentContainerStyle={styles.boxListHospitalTop}
         data={dataHospitalTop}
         keyExtractor={keyExtractor}
@@ -64,6 +60,9 @@ const styles = StyleSheet.create({
   },
   containerTopHospital: {
     flex: 1,
-    paddingBottom: 50,
+    paddingBottom: 30,
+  },
+  listTopHospital: {
+    flex: 1,
   },
 });
