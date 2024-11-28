@@ -9,7 +9,7 @@ import {
 import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getCookiesState, resetLogin} from '../../redux/slide/app.slice';
-import {QueryGetUserinfo, QueryLogOut} from './services/home.query';
+import {QueryGetUserinfo} from './services/home.query';
 import Loading from '../../components/loading/Loading';
 import {getUserInfoState, setUser} from '../../redux/slide/user.slice';
 import HeaderAvatar from '../../components/layout/HeaderAvatar';
@@ -17,6 +17,10 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import ContentHome from './ContentHome';
 import {BACKGROUND_BLUE} from '../../constants/Color';
 import {useQueryClient} from 'react-query';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {AuthStackParams} from '../auth/AuthStack';
+import {MainStackParams} from '../../navigation/MainStackNavigation';
 
 export default function Home() {
   const {
@@ -33,6 +37,11 @@ export default function Home() {
     queryClient.removeQueries(['getUserInfo']);
     refetchUserInfo();
   }, []);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<MainStackParams>>();
+  const handleSpecialty = useCallback(() => {
+    navigation.navigate('Specialty');
+  }, []);
   useEffect(() => {
     if (dataInfoUser?.user && dataInfoUser?.err == 0) {
       dispatch(setUser(dataInfoUser?.user));
@@ -44,6 +53,8 @@ export default function Home() {
         avatar={infoUser.avatar}
         paddingTop={insets.top}
         nameUser={infoUser?.name}
+        handleSpecialty={handleSpecialty}
+        isLoading={isLoading}
       />
       {isLoading || isRefetching ? (
         <Loading />

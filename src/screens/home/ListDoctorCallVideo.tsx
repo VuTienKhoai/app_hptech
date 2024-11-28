@@ -53,7 +53,7 @@ const ListDoctorCallVideo = () => {
         style={styles.listTopHospital}
         contentContainerStyle={styles.boxListHospitalTop}
         data={dataListDoctorCallVideo}
-        keyExtractor={keyExtractor}
+        keyExtractor={item => item.id}
         renderItem={renderItemDoctor}
         showsHorizontalScrollIndicator={false}
       />

@@ -43,7 +43,7 @@ const TopHospitals = () => {
         style={styles.listTopHospital}
         contentContainerStyle={styles.boxListHospitalTop}
         data={dataHospitalTop}
-        keyExtractor={keyExtractor}
+        keyExtractor={item => item.id}
         renderItem={renderItemHospital}
         showsHorizontalScrollIndicator={false}
       />

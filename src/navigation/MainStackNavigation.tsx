@@ -6,6 +6,7 @@ import MedicalReport from '../screens/medical_report';
 import ProfileUser from '../screens/profile_user';
 import MainTabNavigation from './MainTabNavigation';
 import Appointment_booking from '../screens/appointment_booking/Appointment_booking';
+import {Specialty} from '../screens/home/specialty';
 
 export type MainStackParams = {
   MainTabNavigation: undefined;
@@ -13,6 +14,7 @@ export type MainStackParams = {
   MedicalReport: undefined;
   ProfileUser: undefined;
   Appointment_booking: undefined;
+  Specialty: undefined;
 };
 const Stack = createNativeStackNavigator<MainStackParams>();
 
@@ -45,6 +47,13 @@ export default function MainStackNavigation() {
         <Stack.Screen
           name="Appointment_booking"
           component={Appointment_booking}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Specialty"
+          component={Specialty}
           options={{
             headerShown: false,
           }}

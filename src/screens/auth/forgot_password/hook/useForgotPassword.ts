@@ -15,26 +15,21 @@ export const useForgotPassword = () => {
   const dispatch = useDispatch();
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParams>>();
-  const handleForgotPassword = useCallback(
-    (otpToken: string) => {
-      navigation.navigate('OtpForgotPassword', {otpToken: 'otpToken'});
-    },
-    [navigation],
-  );
+  const handleForgotPassword = useCallback(() => {
+    navigation.navigate('Login');
+  }, [navigation]);
   const onSubmit = useCallback((data: dataForgotPassword) => {
-    console.log('🚀 ~ onSubmit ~ data:', data);
     setLoading(true);
     if (data) {
       forgotPassword(data)
         .then((res: any) => {
-          console.log('🚀 ~ .then ~ res:', res);
           if (res.err == 1) {
             ShowToastCustom({
               text1: 'Otp đã được gửi về Email của bạn',
               typeStatus: 'success',
             });
             dispatch(setEmail(data.email));
-            handleForgotPassword(res.otpToken);
+            handleForgotPassword();
           } else {
             ShowToastCustom({text1: res.mess, typeStatus: 'error'});
           }

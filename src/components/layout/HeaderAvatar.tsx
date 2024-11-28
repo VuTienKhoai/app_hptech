@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   DimensionValue,
   Image,
   StyleSheet,
@@ -16,13 +17,19 @@ import {
 } from '../../constants/Color';
 import {SvgXml} from 'react-native-svg';
 import {icon_search} from '../../assets/svg/home/icon_search';
+import {TypingEffectText} from '../animation';
+import {Skeleton} from 'native-base';
+const {width} = Dimensions.get('screen');
 interface IHeaderAvatar {
   avatar: string;
   nameUser: string;
   paddingTop?: DimensionValue | undefined;
+  handleSpecialty: () => void;
+  isLoading?: boolean;
 }
 const HeaderAvatar = (props: IHeaderAvatar) => {
-  const {nameUser, avatar, paddingTop} = props;
+  const {nameUser, avatar, paddingTop, handleSpecialty, isLoading} = props;
+
   const styleMemoHeader = useMemo(() => {
     return {
       ...styles.headerAvatar,
@@ -40,12 +47,25 @@ const HeaderAvatar = (props: IHeaderAvatar) => {
           <Text style={styles.titleHeader}>{nameUser}</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.boxInputHeader}>
-        <Text style={styles.textInputHeader}>
-          Tìm CSYT/bác sĩ/chuyên khoa/dịch vụ
-        </Text>
-        <SvgXml xml={icon_search} />
-      </TouchableOpacity>
+      {isLoading ? (
+        <Skeleton
+          height="50px"
+          borderRadius="10px"
+          startColor="coolGray.100"
+          style={styles.skecetonTextInput}
+        />
+      ) : (
+        <TouchableOpacity
+          style={styles.boxInputHeader}
+          onPress={handleSpecialty}>
+          <TypingEffectText
+            text=" Tìm CSYT/bác sĩ/chuyên khoa/dịch vụ"
+            speed={100}
+            delay={1500}
+          />
+          <SvgXml xml={icon_search} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -74,6 +94,7 @@ const styles = StyleSheet.create({
   boxInputHeader: {
     backgroundColor: BACKGROUND_WHITE,
     paddingVertical: 10,
+    minHeight: 50,
     paddingHorizontal: 14,
     marginTop: 10,
     borderRadius: 18,
@@ -88,5 +109,9 @@ const styles = StyleSheet.create({
   topHeaderAvatar: {
     paddingTop: 10,
     flexDirection: 'row',
+  },
+  skecetonTextInput: {
+    marginTop: 10,
+    // flex: 1,
   },
 });
