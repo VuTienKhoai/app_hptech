@@ -1,14 +1,6 @@
-import {
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {RefreshControl, ScrollView, StyleSheet, View} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getCookiesState, resetLogin} from '../../redux/slide/app.slice';
 import {QueryGetUserinfo} from './services/home.query';
 import Loading from '../../components/loading/Loading';
 import {getUserInfoState, setUser} from '../../redux/slide/user.slice';
@@ -19,7 +11,6 @@ import {BACKGROUND_BLUE} from '../../constants/Color';
 import {useQueryClient} from 'react-query';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {AuthStackParams} from '../auth/AuthStack';
 import {MainStackParams} from '../../navigation/MainStackNavigation';
 
 export default function Home() {
