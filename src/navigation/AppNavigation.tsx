@@ -12,24 +12,25 @@ import {setPhoneNumber} from '../redux/slide/user.slice';
 
 export function CreateAppContainer() {
   const {cookies} = useAppNavigation();
-  const dispatch = useDispatch();
-  const getPhoneNumber = useCallback(async () => {
-    await RequestPermission();
-    try {
-      const phoneNumber = await DeviceInfo.getSerialNumber();
-      console.log('Số điện thoại:', phoneNumber);
-      if (phoneNumber !== 'unknown' && phoneNumber) {
-        dispatch(setPhoneNumber(phoneNumber));
-      }
-      return phoneNumber;
-    } catch (error) {
-      console.error('Không thể lấy số điện thoại:', error);
-      return null;
-    }
-  }, []);
-  useEffect(() => {
-    getPhoneNumber();
-  }, []);
+  // const cookies = '41414124';
+  // const dispatch = useDispatch();
+  // const getPhoneNumber = useCallback(async () => {
+  //   await RequestPermission();
+  //   try {
+  //     const phoneNumber = await DeviceInfo.getSerialNumber();
+  //     console.log('Số điện thoại:', phoneNumber);
+  //     if (phoneNumber !== 'unknown' && phoneNumber) {
+  //       dispatch(setPhoneNumber(phoneNumber));
+  //     }
+  //     return phoneNumber;
+  //   } catch (error) {
+  //     console.error('Không thể lấy số điện thoại:', error);
+  //     return null;
+  //   }
+  // }, []);
+  // useEffect(() => {
+  //   getPhoneNumber();
+  // }, []);
   return (
     <NativeBaseProvider>
       <NavigationContainer ref={navigationRef} key="main">

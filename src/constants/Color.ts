@@ -1,5 +1,6 @@
 export const BACKGROUND_WHITE = '#FFF';
 export const BACKGROUND_BLACK = '#000';
+export const BACKGROUND_GRAY = '#F0F0F0';
 export const TEXT_PRIMARY = '#00b5f1';
 export const TEXT_COLORS_DARK = '#fff';
 export const TEXT_COLORS_BLACK = '#000';

@@ -10,9 +10,8 @@ import {dontShowHeader} from '../constants';
 import Home from '../screens/home';
 import {tabBarVisible} from '../screens/StackOptions';
 import MedicalReport from '../screens/medical_report';
-import ProfileUser from '../screens/profile_user';
 import HomeUser from '../screens/user';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import ProfileUser from './../screens/profile_user/ProfileUser';
 export const RefreshContext = createContext<any>({
   isRefresh: false,
   setIsRefresh: null,

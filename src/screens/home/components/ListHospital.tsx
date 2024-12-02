@@ -14,9 +14,6 @@ import Animated, {FadeInLeft, FadeOutRight} from 'react-native-reanimated';
 const {width} = Dimensions.get('screen');
 
 const ListHospital = () => {
-  const keyExtractor = useCallback((item: IDatahospital) => {
-    return item.id;
-  }, []);
   const renderItem = useCallback(
     ({item, index}: {item: IDatahospital; index: number}) => {
       return (
@@ -44,7 +41,7 @@ const ListHospital = () => {
       </View>
       <View style={styles.box_flastList}>
         <FlatList
-          keyExtractor={keyExtractor}
+          keyExtractor={item => item?.id}
           showsHorizontalScrollIndicator={false}
           style={styles.box_ListHospital}
           horizontal
