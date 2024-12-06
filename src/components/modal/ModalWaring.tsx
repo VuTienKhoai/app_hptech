@@ -1,12 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 
-export default function ProfileUser() {
+const ModalWaring = () => {
   return (
     <View>
-      <Text>ProfileUser</Text>
+      <Text>ModalWaring</Text>
     </View>
   );
-}
+};
+
+export default memo(ModalWaring);
 
 const styles = StyleSheet.create({});

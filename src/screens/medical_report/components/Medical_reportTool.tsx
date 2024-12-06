@@ -1,29 +1,28 @@
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {memo} from 'react';
 import {
   BACKGROUND_GRAY,
-  BACKGROUND_WHITE,
   TEXT_COLORS_BLACK,
   TEXT_COLORS_DARK,
-} from '../../constants/Color';
-import ButtonAction from '../../components/button/ButtonAction';
+} from '../../../constants/Color';
+import {BACKGROUND_WHITE} from '../../../constants/Color';
+import ButtonAction from '../../../components/button/ButtonAction';
+import {StatusType} from '../MedicalReport';
 
-interface IProfileUserTools {
-  nameScreen: 'Unpaid' | 'Cancelled' | 'Paid' | 'FullyPaid';
-  handlefocusScreen: (value: string) => void;
+interface IMedical_reportTool {
+  nameScreen: 'Unpaid' | 'Cancelled' | 'Paid' | 'Completed';
+  handlefocusScreen: (value: StatusType) => void;
 }
-
-const ProfileUserTools = ({
+const Medical_reportTool = ({
   handlefocusScreen,
   nameScreen,
-}: IProfileUserTools) => {
-  const screens = [
-    {title: 'Đã thanh toán', value: 'FullyPaid'},
+}: IMedical_reportTool) => {
+  const screens: {title: string; value: StatusType}[] = [
+    {title: 'Đã thanh toán', value: 'Completed'},
     {title: 'Chưa thanh toán', value: 'Unpaid'},
     {title: 'Đã khám', value: 'Paid'},
     {title: 'Đã hủy', value: 'Cancelled'},
   ];
-
   return (
     <ScrollView
       horizontal
@@ -51,7 +50,7 @@ const ProfileUserTools = ({
   );
 };
 
-export default memo(ProfileUserTools);
+export default memo(Medical_reportTool);
 
 const styles = StyleSheet.create({
   containerUserTools: {

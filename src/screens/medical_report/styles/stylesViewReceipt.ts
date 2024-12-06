@@ -30,7 +30,7 @@ export const stylesReceipt = StyleSheet.create({
   },
   boxHeaderLeft: {
     flexDirection: 'column',
-    width: '70%',
+    width: '65%',
   },
   boxHeaderRight: {
     flexDirection: 'row',
@@ -59,7 +59,6 @@ export const stylesReceipt = StyleSheet.create({
   },
   textBtnHeaderRight: {
     fontSize: 17,
-    lineHeight: 30,
     color: TEXT_PRIMARY,
   },
   heightViewReceipt: {

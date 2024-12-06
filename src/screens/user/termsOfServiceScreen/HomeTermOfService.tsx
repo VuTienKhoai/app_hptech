@@ -1,10 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-export default function ProfileUser() {
+export default function HomeTermOfService() {
   return (
     <View>
-      <Text>ProfileUser</Text>
+      <Text>HomeTermOfService</Text>
     </View>
   );
 }
