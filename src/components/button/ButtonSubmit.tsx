@@ -27,10 +27,7 @@ const ButtonSubmit = (props: ButtonSubmitProps) => {
     !onLoading && onPress();
   }, [onLoading, onPress]);
   const styleMemoText = useMemo(() => {
-    return {
-      ...styles.TextbtnLogin,
-      styleText,
-    };
+    return [styles.TextbtnLogin, styleText];
   }, [styleText]);
   return (
     <TouchableOpacity

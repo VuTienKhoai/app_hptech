@@ -63,7 +63,7 @@ export default function Login() {
                 title={'Đăng Nhập'}
                 onPress={handleSubmit(onSubmit)}
                 onLoading={isFetching}
-                styleText={{fontSize: 1}}
+                // styleText={{fontSize: 1}}
               />
               <Text style={styles.descriptionLogin}>Hoặc đăng nhập bằng</Text>
               <View style={styles.boxLayoutToolsLoign}>

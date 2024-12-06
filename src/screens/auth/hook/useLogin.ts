@@ -33,7 +33,6 @@ export const useLogin = () => {
     body: body,
     options: {staleTime: 0, queryKey: ['login', body]},
   });
-  console.log('🚀 ~ useLogin ~ data:', data);
 
   const onSubmit = (values: any) => {
     const loginData = {
